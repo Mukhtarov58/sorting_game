@@ -1,18 +1,18 @@
 package org.example.game;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.File;
-import java.io.IOException;
 
 public class SoundPlayer {
-    public static void playSound(String filePath) {
+
+    public static void playSound(String soundFilePath) {
         try {
-            File soundFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+            File soundFile = new File(soundFilePath);
             Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
+            clip.open(AudioSystem.getAudioInputStream(soundFile));
             clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

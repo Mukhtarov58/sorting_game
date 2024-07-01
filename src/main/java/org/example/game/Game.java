@@ -31,7 +31,6 @@ public class Game extends JFrame {
         ImageIcon icon = new ImageIcon("src/main/resources/GSort.ico");
         setIconImage(icon.getImage());
         this.gamePanel = new GamePanel(currentLevel, fallingTrashes, backgroundImage, lives, score);
-
         initUI();
         startGame();
     }
@@ -84,11 +83,14 @@ public class Game extends JFrame {
 
     private void startGame() {
         currentLevel = new Level(currentLevelNumber, mode, gamePanel);
+        fallingTrashes.clear();
+        fallingTrashes.addAll(currentLevel.getTrashes());
         gamePanel.setCurrentLevel(currentLevel);
         gamePanel.setFallingTrashes(currentLevel.getTrashes());
-        gamePanel.setLevelNumber(currentLevelNumber); // Устанавливаем текущий уровень в GamePanel
-        currentLevel.start();
+        gamePanel.setLevelNumber(currentLevelNumber);
+        currentLevel.start(); // Запускаем уровень
     }
+
 
 
     private void updateGame() {
@@ -98,50 +100,76 @@ public class Game extends JFrame {
             trash.updatePosition();
             checkCollision(trash);
         }
+
+        if (shouldLevelUp()) {
+            currentLevelNumber++;
+            if (currentLevelNumber <= 5) {
+                startGame(); // Запускаем новый уровень
+            }
+        }
     }
 
+
     private void checkCollision(Trash trash) {
-        for (Bin bin : currentLevel.getBins()) {
+        Iterator<Bin> iterator = currentLevel.getBins().iterator();
+        while (iterator.hasNext()) {
+            Bin bin = iterator.next();
             if (trash.getBounds().intersects(bin.getBounds())) {
                 if (trash.getType().equals(bin.getType())) {
+                    iterator.remove(); // Удаляем корзину из списка, если совпадение типов
                     fallingTrashes.remove(trash);
                     score += 5;
                     gamePanel.updateScore(score);
-                    if (score >= 1000) {
-                        gamePanel.setGameWon(true);
-                        timer.stop();
-                    } else if (shouldLevelUp()) {
-                        currentLevelNumber++;
-                        if (currentLevelNumber <= 4) {
-                            startGame(); // Обновляем текущий уровень после увеличения номера уровня
-                        }
-                    }
                     SoundPlayer.playSound("src/main/resources/correct.wav");
+                    if (shouldLevelUp()) {
+                        advanceToNextLevel();
+                    }
                 } else {
                     fallingTrashes.remove(trash);
                     lives--;
                     gamePanel.updateLives(lives);
-                    if (lives <= 0) {
-                        gamePanel.setGameOver(true);
-                        timer.stop();
-                    }
                     SoundPlayer.playSound("src/main/resources/wrong.wav");
+                    if (lives <= 0) {
+                        gameOver();
+                    }
                 }
-                break;
+                break; // Выходим из цикла, после обработки столкновения
             }
         }
+    }
+    private void advanceToNextLevel() {
+        currentLevelNumber++;
+        if (currentLevelNumber <= 5) {
+            currentLevel = new Level(currentLevelNumber, mode, gamePanel); // Создаем новый уровень
+            gamePanel.setCurrentLevel(currentLevel); // Устанавливаем новый уровень в GamePanel
+            gamePanel.setLevelNumber(currentLevelNumber); // Обновляем номер уровня в GamePanel
+            gamePanel.updateLevel(currentLevelNumber); // Обновляем отображение уровня в GamePanel
+            startGame(); // Запускаем новый уровень
+        }
+        if (score >= 1000) {
+            gamePanel.setGameWon(true);
+            stopTimer();
+        }
+    }
+    private void gameOver() {
+        gamePanel.setGameOver(true);
+        stopTimer();
+    }
+
+    private void stopTimer() {
+        timer.stop();
     }
 
     private boolean shouldLevelUp() {
         switch (currentLevelNumber) {
             case 1:
-                return score >= 10;
+                return score >= 5;
             case 2:
-                return score >= 30;
+                return score >= 10;
             case 3:
-                return score >= 400;
+                return score >= 20;
             case 4:
-                return score >= 1000;
+                return score >= 100;
             default:
                 return false;
         }

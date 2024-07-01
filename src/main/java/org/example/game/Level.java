@@ -25,6 +25,7 @@ public class Level {
         initializeLevel(); // Вызываем инициализацию уровня
         setupTimer();
         gamePanel.setLevelNumber(levelNumber); // Устанавливаем текущий уровень в GamePanel
+        gamePanel.updateLevel(levelNumber);
     }
 
     private void initializeLevel() {
@@ -33,28 +34,31 @@ public class Level {
         switch (levelNumber) {
             case 1:
                 bins.add(new Bin("Paper", 100, 500, 50, 50));
-                bins.add(new Bin("Glass", 200, 500, 50, 50));
                 break;
             case 2:
                 bins.add(new Bin("Paper", 100, 500, 50, 50));
                 bins.add(new Bin("Glass", 200, 500, 50, 50));
-                bins.add(new Bin("Plastic", 300, 500, 50, 50));
                 break;
             case 3:
                 bins.add(new Bin("Paper", 100, 500, 50, 50));
                 bins.add(new Bin("Glass", 200, 500, 50, 50));
                 bins.add(new Bin("Plastic", 300, 500, 50, 50));
-                bins.add(new Bin("Metal", 400, 500, 50, 50));
                 break;
             case 4:
                 bins.add(new Bin("Paper", 100, 500, 50, 50));
                 bins.add(new Bin("Glass", 200, 500, 50, 50));
                 bins.add(new Bin("Plastic", 300, 500, 50, 50));
                 bins.add(new Bin("Metal", 400, 500, 50, 50));
+                break;
+            case 5:
+                bins.add(new Bin("Paper", 100, 500, 50, 50));
+                bins.add(new Bin("Glass", 200, 500, 50, 50));
+                bins.add(new Bin("Plastic", 300, 500, 50, 50));
+                bins.add(new Bin("Metal", 400, 500, 50, 50));
                 bins.add(new Bin("Organic", 500, 500, 50, 50));
                 break;
+
             default:
-                // Handle unexpected levelNumber
                 break;
         }
     }
@@ -142,7 +146,7 @@ public class Level {
         String[] trashTypes = {"Paper", "Glass", "Plastic", "Metal", "Organic"};
         int randomIndex = (int) (Math.random() * trashTypes.length);
         String type = trashTypes[randomIndex];
-        int x = 100 + randomIndex * 100;
+        int x = (int) (Math.random() * (800 - 30)); // Генерация случайной позиции x
         Trash newTrash = new Trash(type, x, 0, 30, 30);
         trashes.add(newTrash);
     }
@@ -155,10 +159,6 @@ public class Level {
     public void stopGame() {
         timer.stop();
         trashGenerationTimer.stop();
-    }
-
-    public int getLevelNumber() {
-        return levelNumber;
     }
 
     public List<Bin> getBins() {

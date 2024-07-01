@@ -139,6 +139,10 @@ public class GamePanel extends JPanel {
         this.lives = lives;
         repaint();
     }
+    public void updateLevel(int levelNumber) {
+        this.levelNumber = levelNumber;
+        repaint();
+    }
 
     public void updateScore(int score) {
         this.score = score;

@@ -22,6 +22,8 @@ public class Game extends JFrame {
     private int currentLevelNumber;
     private Timer trashGenerationTimer;
     private List<Bin> bins;
+    private IntroScreen introScreen;
+
 
     /**
      * Конструктор игры, инициализирует необходимые компоненты.
@@ -40,6 +42,7 @@ public class Game extends JFrame {
         ImageIcon icon = new ImageIcon("src/main/resources/GSort.ico");
         setIconImage(icon.getImage());
         this.gamePanel = new GamePanel(this, trashes, backgroundImage, lives, score);
+        this.introScreen = new IntroScreen();
         initUI();
         startGame();
     }
@@ -133,7 +136,7 @@ public class Game extends JFrame {
      * Проверка столкновений мусора с корзинами.
      *
      * @param iterator итератор для удаления мусора
-     * @param trash текущий мусор
+     * @param trash    текущий мусор
      */
     private void checkCollision(Iterator<Trash> iterator, Trash trash) {
         for (Bin bin : bins) {
@@ -188,8 +191,7 @@ public class Game extends JFrame {
         if (score >= 1000) {
             gamePanel.setGameWon(true);
             stopTimer();
-
-
+            introScreen.setVisible(true); // Показываем начальный экран при победе
         }
     }
 
@@ -199,6 +201,7 @@ public class Game extends JFrame {
     private void gameOver() {
         gamePanel.setGameOver(true);
         stopTimer();
+        introScreen.setVisible(true); // Показываем начальный экран при победе
     }
 
     /**
@@ -320,5 +323,6 @@ public class Game extends JFrame {
         currentLevelNumber = 1;
         gamePanel.reset(lives, score);
         startGame();
+        introScreen.setVisible(false); // Скрываем начальный экран после сброса игры
     }
 }

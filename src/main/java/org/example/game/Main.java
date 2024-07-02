@@ -1,4 +1,4 @@
-package org.example;
+package org.example.game;
 
 import org.example.game.Game;
 import org.example.game.GameMode;
@@ -12,6 +12,7 @@ public class Main {
             GameMode mode = selectGameMode();
             if (mode != null) {
                 Game game = new Game(mode);
+                System.out.println("Начало игры");
                 game.setVisible(true);
             } else {
                 System.exit(0); // Выход из приложения, если пользователь отменил выбор

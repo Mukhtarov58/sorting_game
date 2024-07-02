@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
+// Класс мусора
 public class Trash {
     private String type;
     private int x, y, width, height;
@@ -18,6 +19,9 @@ public class Trash {
         loadImage();
     }
 
+    /**
+     * Загрузка изображения мусора на основе типа
+     */
     private void loadImage() {
         String imagePath = "src/main/resources/images/" + type.toLowerCase() + ".png";
         ImageIcon ii = new ImageIcon(imagePath);
@@ -28,10 +32,18 @@ public class Trash {
         return type;
     }
 
+    /**
+     * Метод для обновления позиции мусора (падение вниз)
+     */
     public void updatePosition() {
         this.y += 5; // Скорость падения
     }
 
+    /**
+     * Метод для получения прямоугольных границ мусора (для столкновений)
+     *
+     * @return
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

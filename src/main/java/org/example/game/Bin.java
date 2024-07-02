@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
+// Класс мусорных корзин
 public class Bin {
     private String type;
     private int x, y, width, height;
@@ -18,6 +19,9 @@ public class Bin {
         loadImage();
     }
 
+    /**
+     * Загрузка изображения корзины на основе типа
+     */
     private void loadImage() {
         String imagePath = "src/main/resources/images/bin_" + type.toLowerCase() + ".png";
         ImageIcon ii = new ImageIcon(imagePath);
@@ -28,10 +32,18 @@ public class Bin {
         return type;
     }
 
+    /**
+     * Метод для перемещения корзины по оси X
+     * @param dx
+     */
     public void move(int dx) {
         this.x += dx;
     }
 
+    /**
+     * Метод для получения прямоугольных границ корзины (для столкновений)
+     * @return
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

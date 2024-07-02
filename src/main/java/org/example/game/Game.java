@@ -188,7 +188,7 @@ public class Game extends JFrame {
             startGame(); // Запускаем новый уровень
             System.out.println("Переход на следующий уровень");
         }
-        if (score >= 1000) {
+        if (score >= 150) {
             gamePanel.setGameWon(true);
             stopTimer();
             introScreen.setVisible(true); // Показываем начальный экран при победе
@@ -219,11 +219,11 @@ public class Game extends JFrame {
     private boolean shouldLevelUp() {
         switch (currentLevelNumber) {
             case 1:
-                return score >= 10;  // Условие для первого уровня
+                return score >= 30;  // Условие для первого уровня
             case 2:
-                return score >= 20;  // Условие для второго уровня
+                return score >= 50;  // Условие для второго уровня
             case 3:
-                return score >= 30;  // Условие для третьего уровня
+                return score >= 70;  // Условие для третьего уровня
             case 4:
                 return score >= 100;  // Условие для четвертого уровня
             default:

@@ -117,7 +117,9 @@ public class GamePanel extends JPanel {
     private void drawGameWon(Graphics g) {
         g.setFont(new Font("Arial", Font.BOLD, 50));
         g.setColor(Color.GREEN);
-        g.drawString("You Win!", getWidth() / 2 - 150, getHeight() / 2);
+        g.drawString("You Win!" + "\r\n", getWidth() / 2 - 150, getHeight() / 2);
+        g.setColor(Color.WHITE);
+        g.drawString("Press ENTER", getWidth() / 2 - 150, getHeight() / 2);
     }
 
     /**

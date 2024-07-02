@@ -180,7 +180,7 @@ public class Game extends JFrame {
     /**
      * Переход на следующий уровень.
      */
-    private void advanceToNextLevel() {
+    public void advanceToNextLevel() {
         currentLevelNumber++;
         if (currentLevelNumber <= 5) {
             gamePanel.setLevelNumber(currentLevelNumber); // Обновляем номер уровня в GamePanel
@@ -188,17 +188,16 @@ public class Game extends JFrame {
             startGame(); // Запускаем новый уровень
             System.out.println("Переход на следующий уровень");
         }
-        if (score >= 150) {
+        else {
             gamePanel.setGameWon(true);
             stopTimer();
-            introScreen.setVisible(true); // Показываем начальный экран при победе
         }
     }
 
     /**
      * Завершение игры
      */
-    private void gameOver() {
+    void gameOver() {
         gamePanel.setGameOver(true);
         stopTimer();
         introScreen.setVisible(true); // Показываем начальный экран при победе
@@ -221,11 +220,13 @@ public class Game extends JFrame {
             case 1:
                 return score >= 30;  // Условие для первого уровня
             case 2:
-                return score >= 50;  // Условие для второго уровня
+                return score >= 60;  // Условие для второго уровня
             case 3:
-                return score >= 70;  // Условие для третьего уровня
+                return score >= 80;  // Условие для третьего уровня
             case 4:
                 return score >= 100;  // Условие для четвертого уровня
+            case 5:
+                return score >= 150;  // Условие для пятого уровня
             default:
                 return false;
         }
@@ -312,6 +313,10 @@ public class Game extends JFrame {
      */
     public List<Bin> getBins() {
         return bins;
+    }
+
+    public int getCurrentLevelNumber() {
+        return currentLevelNumber;
     }
 
     /**

@@ -53,7 +53,7 @@ public class IntroScreen extends JFrame {
         middleButton.setFont(buttonFont);
         middleButton.setBackground(Color.YELLOW);
         middleButton.setForeground(Color.BLACK);
-        middleButton.setFocusPainted(false); // Убираем рамку фокуса
+        middleButton.setFocusPainted(false);
         middleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +61,7 @@ public class IntroScreen extends JFrame {
                 startGame();
             }
         });
-        panel.add(Box.createVerticalStrut(20)); // Отступы между кнопками
+        panel.add(Box.createVerticalStrut(20));
         panel.add(middleButton);
 
         // Кнопка "Hard"
@@ -69,7 +69,7 @@ public class IntroScreen extends JFrame {
         hardButton.setFont(buttonFont);
         hardButton.setBackground(Color.RED);
         hardButton.setForeground(Color.WHITE);
-        hardButton.setFocusPainted(false); // Убираем рамку фокуса
+        hardButton.setFocusPainted(false);
         hardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,10 +77,8 @@ public class IntroScreen extends JFrame {
                 startGame();
             }
         });
-        panel.add(Box.createVerticalStrut(20)); // Отступы между кнопками
+        panel.add(Box.createVerticalStrut(20));
         panel.add(hardButton);
-
-        // Добавление панели на центр окна
         add(panel, BorderLayout.CENTER);
     }
 

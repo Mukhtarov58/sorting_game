@@ -146,7 +146,7 @@ public class Game extends JFrame {
                     System.out.println("Увеличиваем очки на 5");
                     score += 5;
                     gamePanel.updateScore(score);
-                    SoundPlayer.playSound("src/main/resources/correct.wav");
+                    SoundPlayer.playSound("src/main/resources/yeee.wav");
                     if (shouldLevelUp()) {
                         advanceToNextLevel();
                     }
@@ -154,7 +154,7 @@ public class Game extends JFrame {
                     iterator.remove();
                     lives--;
                     gamePanel.updateLives(lives);
-                    SoundPlayer.playSound("src/main/resources/wrong.wav");
+                    SoundPlayer.playSound("src/main/resources/oi.wav");
                     if (lives <= 0) {
                         gameOver();
                     }

@@ -14,6 +14,11 @@ public class IntroScreen extends JFrame {
 
     private void initUI() {
         setTitle("Sorting Game");
+
+        // Установка иконки
+        ImageIcon icon = new ImageIcon("src/main/resources/GSort.ico");
+        setIconImage(icon.getImage());
+
         setSize(800, 700);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

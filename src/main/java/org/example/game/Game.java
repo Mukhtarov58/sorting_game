@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 
 public class Game extends JFrame {
     private GameMode mode;
@@ -187,8 +189,7 @@ public class Game extends JFrame {
             gamePanel.updateLevel(currentLevelNumber); // Обновляем отображение уровня в GamePanel
             startGame(); // Запускаем новый уровень
             System.out.println("Переход на следующий уровень");
-        }
-        else {
+        } else {
             gamePanel.setGameWon(true);
             stopTimer();
         }
@@ -200,6 +201,12 @@ public class Game extends JFrame {
     void gameOver() {
         gamePanel.setGameOver(true);
         stopTimer();
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        SoundPlayer.playSound("src/main/resources/goodbaaa.wav");
         introScreen.setVisible(true); // Показываем начальный экран при победе
     }
 

@@ -39,9 +39,9 @@ public class Game extends JFrame {
         this.lives = 5;
         this.score = 0;
         this.currentLevelNumber = 1;
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/backgroundImageIcon.jpg");
+        ImageIcon backgroundImageIcon = new ImageIcon(getClass().getResource("/backgroundImageIcon.jpg"));
         Image backgroundImage = backgroundImageIcon.getImage();
-        ImageIcon icon = new ImageIcon("src/main/resources/GSort.ico");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/GSort.ico"));
         setIconImage(icon.getImage());
         this.gamePanel = new GamePanel(this, trashes, backgroundImage, lives, score);
         this.introScreen = new IntroScreen();
@@ -148,7 +148,7 @@ public class Game extends JFrame {
                     System.out.println("Увеличиваем очки на 5");
                     score += 5;
                     gamePanel.updateScore(score);
-                    SoundPlayer.playSound("src/main/resources/yeee.wav");
+                    SoundPlayer.playSound(getClass().getResourceAsStream("/yeee.wav"));
                     if (shouldLevelUp()) {
                         advanceToNextLevel();
                     }
@@ -156,7 +156,7 @@ public class Game extends JFrame {
                     iterator.remove();
                     lives--;
                     gamePanel.updateLives(lives);
-                    SoundPlayer.playSound("src/main/resources/oi.wav");
+                    SoundPlayer.playSound(getClass().getResourceAsStream("/oi.wav"));
                     if (lives <= 0) {
                         gameOver();
                     }
@@ -206,7 +206,7 @@ public class Game extends JFrame {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        SoundPlayer.playSound("src/main/resources/goodbaaa.wav");
+        SoundPlayer.playSound(getClass().getResourceAsStream("/goodbaaa.wav"));
         introScreen.setVisible(true); // Показываем начальный экран при победе
     }
 

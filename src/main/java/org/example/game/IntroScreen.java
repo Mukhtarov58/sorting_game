@@ -16,7 +16,7 @@ public class IntroScreen extends JFrame {
         setTitle("Sorting Game");
 
         // Установка иконки
-        ImageIcon icon = new ImageIcon("src/main/resources/GSort.ico");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/GSort.ico"));
         setIconImage(icon.getImage());
 
         setSize(800, 700);
@@ -24,7 +24,7 @@ public class IntroScreen extends JFrame {
         setLocationRelativeTo(null);
 
         // Установка фонового изображения
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/IntroScreen.png");
+        ImageIcon backgroundImageIcon = new ImageIcon(getClass().getResource("/IntroScreen.png"));
         JLabel backgroundLabel = new JLabel(backgroundImageIcon);
         backgroundLabel.setLayout(new BorderLayout());
         setContentPane(backgroundLabel);

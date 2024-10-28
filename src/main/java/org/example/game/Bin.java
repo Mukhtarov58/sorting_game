@@ -23,8 +23,8 @@ public class Bin {
      * Загрузка изображения корзины на основе типа
      */
     private void loadImage() {
-        String imagePath = "src/main/resources/images/bin_" + type.toLowerCase() + ".png";
-        ImageIcon ii = new ImageIcon(imagePath);
+        String imagePath = "/images/bin_" + type.toLowerCase() + ".png";  // Путь от корня ресурсов
+        ImageIcon ii = new ImageIcon(getClass().getResource(imagePath));
         this.image = ii.getImage();
     }
 

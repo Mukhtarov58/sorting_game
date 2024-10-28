@@ -23,7 +23,7 @@ public class GamePanel extends JPanel {
         this.lives = lives;
         this.score = score;
         this.levelNumber = 1; // По умолчанию начинаем с первого уровня
-        this.heartImage = new ImageIcon("src/main/resources/heart.png").getImage();
+        this.heartImage = new ImageIcon(getClass().getResource("/heart.png")).getImage();
         this.isGameOver = false;
         this.isGameWon = false;
     }
